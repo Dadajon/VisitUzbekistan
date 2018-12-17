@@ -5,4 +5,8 @@
     <string name="profile_name">Profile Name</string>
     <string name="profile_email">Profile Email</string>
     <string name="profile_provider">Profile provider</string>
+
+    <!--<string name="google_maps_API_key">AIzaSyAamoSfZcgP-SiaBTnsgPwWGfovSLhluuo</string>-->
+    <string name="title_activity_maps">Map</string>
+    <string name="example_text">example_text</string>
 </resources>

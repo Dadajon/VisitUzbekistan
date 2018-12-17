@@ -1,15 +1,281 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bukhara123"
+    android:orientation="vertical"
+    android:weightSum="100"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/userProfileBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile"/>
+    <RelativeLayout
+        android:id="@+id/tool_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10">
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.SearchView
+            android:id="@+id/searchView"
+            style="@style/SearchViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="15dp"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/navButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:onClick="navBarShowUp"
+            android:src="@drawable/menu"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/NavGridBar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40"
+        android:alignmentMode="alignMargins"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20"
+            android:orientation="horizontal"
+            android:weightSum="30">
+            <!--Grid Home -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/btnHome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                app:cardBackgroundColor="@color/menu_grid1"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_home" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Home"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!--Grid Profile -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/btnUserProfile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                app:cardBackgroundColor="@color/menu_grid2"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_account_circle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Account"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!--Grid Rental Car -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/btnRentalCar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                app:cardBackgroundColor="@color/menu_grid3"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/rentcar_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rental Car"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20"
+            android:orientation="horizontal"
+            android:weightSum="30">
+            <!--Grid Videos -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/btnVideos"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                app:cardBackgroundColor="@color/menu_grid4"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/videos_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Videos"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!--Grid About Us -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/btnAboutUs"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                app:cardBackgroundColor="@color/menu_grid5"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/about_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="About Us"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!--Grid Map -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/btnMap"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                app:cardBackgroundColor="@color/menu_grid6"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/map_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:text="Map"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50">
+
+        <TextView
+            android:id="@+id/title_uzb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:text="Uzbekistan"
+            android:textColor="#FFFFFF"
+            android:textSize="50sp" />
+
+        <Button
+            android:id="@+id/citiesBtn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/citiesbtn"
+            android:text="Cities >"
+            android:textColor="#FFFF"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</LinearLayout>
