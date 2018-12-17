@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">VisitUzbekistanFinal</string>
+    <string name="app_name">Visit Uzbekistan</string>
+    <string name="facebook_application_id" translatable="false">296494187660051</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb296494187660051</string>
+    <string name="profile_name">Profile Name</string>
+    <string name="profile_email">Profile Email</string>
+    <string name="profile_provider">Profile provider</string>
 </resources>

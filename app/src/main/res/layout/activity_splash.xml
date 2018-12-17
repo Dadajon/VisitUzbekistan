@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     tools:context=".SplashActivity">
+
     <ImageView
         android:id="@+id/ballon"
         android:layout_width="wrap_content"
@@ -17,6 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/sub"
         android:layout_width="wrap_content"
