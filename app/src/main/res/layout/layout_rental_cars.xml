@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="360dp"
+    android:layout_height="350dp"
+    app:contentPadding="10dp"
+    app:cardUseCompatPadding="true"
+    android:layout_gravity="center_horizontal"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp"
+    tools:context=".RentalCarsActivity">
+    <RelativeLayout
+        android:id="@+id/rentalCardViewLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true">
+    <TextView
+        android:id="@+id/rental_car_card_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Crossover"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#000"/>
+    <ImageView
+        android:id="@+id/rental_car_card_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_launcher"
+        android:layout_below="@+id/rental_car_card_title"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

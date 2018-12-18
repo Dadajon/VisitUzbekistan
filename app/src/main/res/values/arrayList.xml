@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="searchArray">
+        <item>Samarkand</item>
+        <item>Registan</item>
+        <item>Gur-e-Amir Mausoleum</item>
+        <item>Shah-i-Zinda</item>
+        <item>Afrosiab Museum</item>
+        <item>Ulugbek`s Observatory</item>
+        <item>Hazrat-Hizr Mosque</item>
+        <item>Tilla-Kari Medressa</item>
+        <item>Tomb of Daniyar</item>
+        <item>Ulugbek Medressa</item>
+        <item>Sher Dor Medressa</item>
+        <item>Platan</item>
+        <item>Old City</item>
+        <item>Cafe Magistr</item>
+        <item>Art Cafe Norgis</item>
+        <item>Samarkand Restaurant</item>
+    </string-array>
+</resources>

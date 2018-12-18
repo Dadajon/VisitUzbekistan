@@ -29,20 +29,29 @@
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".RentalCarsActivity" />
+        <activity android:name=".RentalcarsInnerActivity" />
         <activity
             android:name=".VideosActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="sensor"/>
+            android:screenOrientation="sensor" />
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".CitiesActivity" />
+        <activity android:name=".CitiesInnerActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity
             android:name=".MainMapActivity"
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".MarkerActivity"
             android:label="ActivityForMarkers" />
+        <activity android:name=".SightsActivity" />
+        <activity android:name=".SightsInnerActivity" />
+        <activity android:name=".RestaurantsActivity" />
+        <activity android:name=".BookCarActivity"></activity>
     </application>
+
 </manifest>

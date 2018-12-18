@@ -1,15 +1,18 @@
 package com.example.dadajonjurakuziev.visituzbekistanfinal;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,17 +24,21 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private LinearLayout NavGridBar;
     private ImageButton navButton;
-    private SearchView search;
+    private SearchView searchView;
+    private SearchView.SearchAutoComplete mSearchAutoComplete;
     private RelativeLayout top_bar_relative;
     private LinearLayout main_bg;
     private Button citiesBtn;
     private TextView title_uzb;
     private CardView cvHome, cvAccount, cvRentalCar, cvVideos, cvAboutUs;
-    private SearchView searchView;
+
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
 
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         /*Change the underline color*/
         View searchplate = searchView.findViewById(android.support.v7.appcompat.R.id.search_plate);
         searchplate.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
+        searchView.setMaxWidth(600);
 
         cvHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        SearchList();
     }
 
     private void init() {
@@ -172,5 +181,75 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "You can`t make map request", Toast.LENGTH_SHORT).show();
         }
         return false;
+    }
+
+    @SuppressLint("RestrictedApi")
+    public void SearchList() {
+        ArrayList<String> arraySearch = new ArrayList<>();
+        final ArrayAdapter<String> adapter;
+        arraySearch.addAll(Arrays.asList(getResources().getStringArray(R.array.searchArray)));
+
+        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, arraySearch);
+
+        mSearchAutoComplete = (SearchView.SearchAutoComplete) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        mSearchAutoComplete.setDropDownBackgroundResource(R.color.white);
+        mSearchAutoComplete.setDropDownAnchor(R.id.searchView);
+        mSearchAutoComplete.setThreshold(1);
+        mSearchAutoComplete.setAdapter(adapter);
+
+        final View dropDownAnchor = searchView.findViewById(mSearchAutoComplete.getDropDownAnchor());
+        if (dropDownAnchor != null) {
+            dropDownAnchor.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+                @Override
+                public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                                           int oldLeft, int oldTop, int oldRight, int oldBottom) {
+
+                    // calculate width of DropdownView
+                    int point[] = new int[2];
+                    dropDownAnchor.getLocationOnScreen(point);
+                    // x coordinate of DropDownView
+                    int dropDownPadding = point[0] + mSearchAutoComplete.getDropDownHorizontalOffset();
+
+                    Rect screenSize = new Rect();
+                    getWindowManager().getDefaultDisplay().getRectSize(screenSize);
+                    // screen width
+                    int screenWidth = screenSize.width();
+
+                    // set DropDownView width
+                    mSearchAutoComplete.setDropDownWidth(screenWidth - dropDownPadding * 2);
+                    Log.e(TAG, "DropDownAnchor: " + mSearchAutoComplete.getDropDownAnchor());
+
+                }
+            });
+
+            searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+                @Override
+                public boolean onSuggestionSelect(int i) {
+
+                    return false;
+                }
+
+                public boolean onSuggestionClick(int i) {
+                    String selectedItem = (String) adapter.getItem(i);
+                    Log.d(TAG, "onSuggestionClick: SearchView result: " + selectedItem);
+
+//                    Intent intent = new Intent(MainActivity.this, CitiesInnerActivity.class);
+//                    if (selectedItem.equals("Samarkand")) {
+//                        int background = R.drawable.samarkand;
+//                        String title = "Samarkand";
+//                        String description = "No name is as evocative of the Silk Road as Samarkand (Samarqand). For most people it has the mythical resonance of Zanzibar or Timbuktu, fixed in the Western popular imagination by imaginative poets and playwrights, few of whom saw the city in the flesh.\\n\\n\" +\n" +
+//                                "                                \"On the ground the sublime, larger-than-life monuments of Timur (Tamerlane) and the city’s long, rich history still work some kind of magic. You can visit most of Samarkand’s high-profile attractions in two or three days. If you’re short on time, at least see the Registan, Gur-e-Amir, Bibi-Khanym Mosque and Shah-i-Zinda.\\n\\n\" +\n" +
+//                                "                                \"Away from these islands of majesty, Samarkand is a well-groomed modern city, with a large Russian town of broad avenues and parks. The recent walling off of parts of the old town and the pedestrianisation of Toshkent street has led to the 'Disneyfication' of some areas, but there's enough grandeur left to say that Samarkand remains a breathtaking place to visit.";
+//                        intent.putExtra("city_bg", background);
+//                        intent.putExtra("city_title", title);
+//                        intent.putExtra("city_desc", description);
+//
+//                        startActivity(intent);
+//                    }
+                    return true;
+                }
+            });
+
+        }
     }
 }
