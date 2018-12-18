@@ -15,16 +15,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ImageView
+        
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profilePhoto"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/uzbek_tourism_logo" />
+            android:src="@mipmap/ic_launcher_round" />
         <TextView
             android:id="@+id/profileProvider"
             android:layout_width="wrap_content"

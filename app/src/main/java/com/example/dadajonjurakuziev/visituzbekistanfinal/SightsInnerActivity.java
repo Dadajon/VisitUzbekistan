@@ -1,20 +1,34 @@
 package com.example.dadajonjurakuziev.visituzbekistanfinal;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 public class SightsInnerActivity extends AppCompatActivity {
-    private static final String TAG = "SightsInnerActivity";
     ExpandableTextView expandableTextView;
     ImageButton imageButton;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference reviewRef = db.collection("Cities/Samarkand/Reviews");
+
+    private ReviewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +36,16 @@ public class SightsInnerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sights_inner);
 
         getIncomingIntent();
+        setUpRecyclerView();
+
+        FloatingActionButton reviewBtn = findViewById(R.id.add_sights_review_btn);
+        reviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SightsInnerActivity.this, NewReviewActivity.class);
+                SightsInnerActivity.this.startActivity(intent);
+            }
+        });
     }
 
     private void getIncomingIntent(){
@@ -58,5 +82,32 @@ public class SightsInnerActivity extends AppCompatActivity {
 
         imageButton = findViewById(R.id.expand_collapse);
         imageButton.setColorFilter(0xff78849E, PorterDuff.Mode.SRC_ATOP);
+    }
+
+    private void setUpRecyclerView() {
+        Query query = reviewRef.orderBy("rating", Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions<Review> options = new FirestoreRecyclerOptions.Builder<Review>()
+                .setQuery(query, Review.class)
+                .build();
+
+        adapter = new ReviewAdapter(options, this);
+        RecyclerView recyclerView = findViewById(R.id.sights_review_card_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }

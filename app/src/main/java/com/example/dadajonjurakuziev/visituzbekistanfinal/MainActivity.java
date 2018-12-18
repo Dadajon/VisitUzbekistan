@@ -233,19 +233,19 @@ public class MainActivity extends AppCompatActivity {
                     String selectedItem = (String) adapter.getItem(i);
                     Log.d(TAG, "onSuggestionClick: SearchView result: " + selectedItem);
 
-//                    Intent intent = new Intent(MainActivity.this, CitiesInnerActivity.class);
-//                    if (selectedItem.equals("Samarkand")) {
-//                        int background = R.drawable.samarkand;
-//                        String title = "Samarkand";
-//                        String description = "No name is as evocative of the Silk Road as Samarkand (Samarqand). For most people it has the mythical resonance of Zanzibar or Timbuktu, fixed in the Western popular imagination by imaginative poets and playwrights, few of whom saw the city in the flesh.\\n\\n\" +\n" +
-//                                "                                \"On the ground the sublime, larger-than-life monuments of Timur (Tamerlane) and the city’s long, rich history still work some kind of magic. You can visit most of Samarkand’s high-profile attractions in two or three days. If you’re short on time, at least see the Registan, Gur-e-Amir, Bibi-Khanym Mosque and Shah-i-Zinda.\\n\\n\" +\n" +
-//                                "                                \"Away from these islands of majesty, Samarkand is a well-groomed modern city, with a large Russian town of broad avenues and parks. The recent walling off of parts of the old town and the pedestrianisation of Toshkent street has led to the 'Disneyfication' of some areas, but there's enough grandeur left to say that Samarkand remains a breathtaking place to visit.";
-//                        intent.putExtra("city_bg", background);
-//                        intent.putExtra("city_title", title);
-//                        intent.putExtra("city_desc", description);
-//
-//                        startActivity(intent);
-//                    }
+                    Intent intent = new Intent(MainActivity.this, CitiesInnerActivity.class);
+                    if (selectedItem.equals("Samarkand")) {
+                        String background = "https://firebasestorage.googleapis.com/v0/b/visituzbekistan.appspot.com/o/samarkand.jpeg?alt=media&token=b7afd4ff-d85e-4c5c-a574-979c528682ae";
+                        String title = "Samarkand";
+                        String description = "No name is as evocative of the Silk Road as Samarkand (Samarqand). For most people it has the mythical resonance of Zanzibar or Timbuktu, fixed in the Western popular imagination by imaginative poets and playwrights, few of whom saw the city in the flesh.\\n\\n\" +\n" +
+                                "                                \"On the ground the sublime, larger-than-life monuments of Timur (Tamerlane) and the city’s long, rich history still work some kind of magic. You can visit most of Samarkand’s high-profile attractions in two or three days. If you’re short on time, at least see the Registan, Gur-e-Amir, Bibi-Khanym Mosque and Shah-i-Zinda.\\n\\n\" +\n" +
+                                "                                \"Away from these islands of majesty, Samarkand is a well-groomed modern city, with a large Russian town of broad avenues and parks. The recent walling off of parts of the old town and the pedestrianisation of Toshkent street has led to the 'Disneyfication' of some areas, but there's enough grandeur left to say that Samarkand remains a breathtaking place to visit.";
+                        intent.putExtra("city_bg", background);
+                        intent.putExtra("city_title", title);
+                        intent.putExtra("city_desc", description);
+
+                        startActivity(intent);
+                    }
                     return true;
                 }
             });

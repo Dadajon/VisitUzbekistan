@@ -51,7 +51,8 @@
         <activity android:name=".SightsActivity" />
         <activity android:name=".SightsInnerActivity" />
         <activity android:name=".RestaurantsActivity" />
-        <activity android:name=".BookCarActivity"></activity>
+        <activity android:name=".BookCarActivity" />
+        <activity android:name=".NewReviewActivity"></activity>
     </application>
 
 </manifest>

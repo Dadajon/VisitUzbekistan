@@ -188,21 +188,15 @@
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="20dp" />
+                    <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                        android:id="@+id/sights_review_card_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"/>
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
-            
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
-                android:id="@+id/sights_review_card_view"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"/>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

@@ -232,10 +232,12 @@
                         android:scrollbars="none"
                         app:msrv_gravity="center"
                         app:msrv_ms_per_inch="50"
-                        app:msrv_snap_count="1">
+                        app:msrv_snap_count="1"/>
 
-                    </com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView>
-
+                    <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                        android:id="@+id/cities_review_card_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"/>
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="20dp" />

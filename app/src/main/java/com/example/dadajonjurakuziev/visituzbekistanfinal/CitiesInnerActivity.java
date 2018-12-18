@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,15 +17,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class CitiesInnerActivity extends AppCompatActivity {
     ExpandableTextView expandableTextView;
     ImageButton imageButton;
+
+    private FirebaseFirestore db;
+    private CollectionReference reviewRef;
+    private ReviewAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +45,15 @@ public class CitiesInnerActivity extends AppCompatActivity {
 
         getIncomingIntent();
 
+        FloatingActionButton btnAddReview = findViewById(R.id.btn_add_review);
+        btnAddReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CitiesInnerActivity.this, NewReviewActivity.class);
+                CitiesInnerActivity.this.startActivity(intent);
+            }
+        });
+
         restaurantsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,10 +65,11 @@ public class CitiesInnerActivity extends AppCompatActivity {
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(CitiesActivity.this, MainMapActivity.class);
-//                CitiesActivity.this.startActivity(intent);
+                Intent intent = new Intent(CitiesInnerActivity.this, MainMapActivity.class);
+                CitiesInnerActivity.this.startActivity(intent);
             }
         });
+        setUpRecyclerView();
     }
 
     private void getIncomingIntent(){
@@ -62,6 +81,59 @@ public class CitiesInnerActivity extends AppCompatActivity {
             String cityDesc = bundle.getString("city_desc");
 
             setImage(cityBg, cityTitle, cityDesc);
+
+            switch (cityTitle){
+                case "Tashkent":
+                    db = FirebaseFirestore.getInstance();
+//                    reviewRef = db.collection("Cities/Tashkent/Reviews");
+                    reviewRef = db.collection("Cities/Samarkand/Reviews");
+                    break;
+                case "Bukhara":
+                    db = FirebaseFirestore.getInstance();
+//                    reviewRef = db.collection("Cities/Bukhara/Reviews");
+                    reviewRef = db.collection("Cities/Samarkand/Reviews");
+                    break;
+                case "Samarkand":
+                    db = FirebaseFirestore.getInstance();
+                    reviewRef = db.collection("Cities/Samarkand/Reviews");
+                    break;
+                case "Khiva":
+                    db = FirebaseFirestore.getInstance();
+//                    reviewRef = db.collection("Cities/Khiva/Reviews");
+                    reviewRef = db.collection("Cities/Samarkand/Reviews");
+                    break;
+                case "Nukus":
+                    db = FirebaseFirestore.getInstance();
+//                    reviewRef = db.collection("Cities/Nukus/Reviews");
+                    reviewRef = db.collection("Cities/Samarkand/Reviews");
+                    break;
+                case "Kokand":
+                    db = FirebaseFirestore.getInstance();
+//                    reviewRef = db.collection("Cities/Kokand/Reviews");
+                    reviewRef = db.collection("Cities/Samarkand/Reviews");
+                    break;
+                case "Fergana":
+                    db = FirebaseFirestore.getInstance();
+//                    reviewRef = db.collection("Cities/Fergana/Reviews");
+                    reviewRef = db.collection("Cities/Samarkand/Reviews");
+                    break;
+                case "Termiz":
+                    db = FirebaseFirestore.getInstance();
+//                    reviewRef = db.collection("Cities/Termiz/Reviews");
+                    reviewRef = db.collection("Cities/Samarkand/Reviews");
+                    break;
+                case "Andijan":
+                    db = FirebaseFirestore.getInstance();
+//                    reviewRef = db.collection("Cities/Andijan/Reviews");
+                    reviewRef = db.collection("Cities/Samarkand/Reviews");
+                    break;
+                case "Shakhrisabz":
+                    db = FirebaseFirestore.getInstance();
+//                    reviewRef = db.collection("Cities/Shakhrisabz/Reviews");
+                    reviewRef = db.collection("Cities/Samarkand/Reviews");
+                    break;
+            }
+
             CardView sightsBtn = findViewById(R.id.sightsBtn);
             sightsBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,5 +163,32 @@ public class CitiesInnerActivity extends AppCompatActivity {
 
         imageButton = findViewById(R.id.expand_collapse);
         imageButton.setColorFilter(0xff78849E, PorterDuff.Mode.SRC_ATOP);
+    }
+
+    private void setUpRecyclerView() {
+        Query query = reviewRef.orderBy("rating", Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions<Review> options = new FirestoreRecyclerOptions.Builder<Review>()
+                .setQuery(query, Review.class)
+                .build();
+
+        adapter = new ReviewAdapter(options, this);
+        RecyclerView recyclerView = findViewById(R.id.cities_review_card_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }

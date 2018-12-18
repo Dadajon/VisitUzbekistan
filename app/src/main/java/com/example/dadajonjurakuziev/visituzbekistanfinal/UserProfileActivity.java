@@ -22,6 +22,8 @@ import com.google.firebase.auth.UserInfo;
 import java.util.Arrays;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UserProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
@@ -30,7 +32,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
     //layout vars
     TextView profileProvider, profileName, profileEmail;
-    ImageView profilePhoto;
+    CircleImageView profilePhoto;
     Button logoutButton, deleteButton;
 
     @Override
@@ -61,11 +63,6 @@ public class UserProfileActivity extends AppCompatActivity {
                 profile_name = profile.getDisplayName();
                 profile_email = profile.getEmail();
                 profile_photoUrl = profile.getPhotoUrl();
-
-                Log.d("AUTH", "PROFILE PROVIDER ID =  " + profile_providerId);
-                Log.d("AUTH", "PROFILE NAME =  " + profile_name);
-                Log.d("AUTH", "PROFILE EMAIL =  " + profile_email);
-                Log.d("AUTH", "PROFILE PHOTOURL =  " + profile_photoUrl);
             }
 
 
