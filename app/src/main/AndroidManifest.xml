@@ -52,7 +52,7 @@
         <activity android:name=".SightsInnerActivity" />
         <activity android:name=".RestaurantsActivity" />
         <activity android:name=".BookCarActivity" />
-        <activity android:name=".NewReviewActivity"></activity>
+        <activity android:name=".NewReviewActivity"/>
     </application>
 
 </manifest>

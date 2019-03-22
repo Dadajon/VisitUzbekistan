@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         cvAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Clicked on Hotels", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Clicked on User Profile", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
                 startActivity(intent);
             }
